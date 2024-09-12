@@ -56,6 +56,10 @@ public class TemperatureReporterTests : ISubject
         Assert.That(this.isSubscribed, Is.False);
     }
 
+    public void Notify(Temperature temperature)
+    {
+    }
+
     /// <summary>
     /// Prueba el comportamiento de las actualizaciones recibidas por <see cref="TemperatureReporter"/>. Como el método
     /// <see cref="TemperatureReporter.Update(Temperature)"/> escribe en la consola, para "ver" lo que seescribe en la

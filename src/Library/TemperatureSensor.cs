@@ -27,6 +27,14 @@ public class TemperatureSensor : ISubject
         }
     }
 
+    public void Notify(Temperature temperature)
+    {
+        foreach (var observer in observers)
+        {
+            observer.Update(this.Current);
+        }
+    }
+    
     public void StartMeasuring()
     {
         // Store the previous temperature, so notification is only sent after at least .1 change.
@@ -41,10 +49,7 @@ public class TemperatureSensor : ISubject
                 if (start || (Math.Abs(temp.Value - previous.Value) >= 0.1m))
                 {
                     this.Current = new Temperature(temp.Value, DateTime.Now);
-                    foreach (var observer in observers)
-                    {
-                        observer.Update(this.Current);
-                    }
+                    this.Notify(this.Current);
                     previous = temp;
                     if (start)
                     {
